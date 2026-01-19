@@ -1,0 +1,72 @@
+Build a mobile-first Android app called **FL Preview**. The purpose of this app is to let me instantly listen to the latest audio previews of my FL Studio projects. These previews are automatically rendered on my computer by a PowerShell script and uploaded to Firebase Storage. The app must fetch, display, and play these previews cleanly and reliably.
+
+---------------------------------------
+APP PURPOSE
+---------------------------------------
+The app does NOT need to open or interpret .flp files. It only needs to read:
+1. MP3 preview files uploaded by my auto-render script.
+2. JSON metadata files that describe each preview.
+
+Each render produces:
+- An MP3 file: `<projectName>-<timestamp>.mp3`
+- A JSON metadata file: `<projectName>-<timestamp>.json`
+
+Example metadata JSON:
+{
+  "project": "DrillBeat01",
+  "timestamp": "20260105_124500",
+  "filename": "DrillBeat01-20260105_124500.mp3"
+}
+
+The app must read these metadata files from Firebase Storage, sort them, and display them in a clean UI.
+
+---------------------------------------
+CORE FEATURES
+---------------------------------------
+
+1. **Home Screen: Project List**
+   - Fetch all metadata JSON files from Firebase Storage.
+   - Parse project name, timestamp, and filename.
+   - Group previews by project name.
+   - Display each project with:
+     - Project title
+     - Last updated timestamp
+     - Number of versions available
+   - Sort by most recently updated project.
+
+2. **Project Detail Screen**
+   - Show all versions of the selected project.
+   - Display each version with timestamp.
+   - Include an audio player for each version.
+   - Audio player must support:
+     - Play / Pause
+     - Seek bar
+     - Loading indicator
+   - Show waveform visualization if supported.
+
+3. **Latest Preview Quick-Play**
+   - On the project detail screen, highlight the newest version.
+   - Provide a large, easy-to-tap play button.
+
+4. **Offline Caching**
+   - Cache the most recent preview for each project.
+   - If offline, show cached versions.
+
+5. **Auto-Refresh**
+   - App should refresh the project list when new files appear in Firebase Storage.
+   - Polling interval: every 10–20 seconds OR use Firebase listeners if supported.
+
+6. **Search & Filter**
+   - Search bar to filter projects by name.
+   - Optional: filter by tags (future feature).
+
+---------------------------------------
+BACKEND REQUIREMENTS
+---------------------------------------
+
+Use **Firebase** for:
+- Storage (MP3 + JSON files)
+- Optional: Authentication (email/password or anonymous)
+- Optional: Firestore for storing user notes per project
+
+Firebase Storage structure:

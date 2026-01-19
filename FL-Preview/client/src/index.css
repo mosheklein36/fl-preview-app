@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Dark Theme Default */
+  --background: 240 5% 7%;      /* #111113 - Very Dark Gray */
+  --foreground: 0 0% 95%;       /* #F2F2F2 */
+  
+  --card: 240 4% 12%;           /* #1D1D20 */
+  --card-foreground: 0 0% 95%;
+
+  --popover: 240 4% 12%;
+  --popover-foreground: 0 0% 95%;
+
+  --primary: 32 88% 61%;        /* #F09E48 - FL Studio Orange-ish */
+  --primary-foreground: 240 5% 7%;
+
+  --secondary: 84 53% 56%;      /* #9FCA56 - FL Studio Green-ish */
+  --secondary-foreground: 240 5% 7%;
+
+  --muted: 240 4% 20%;
+  --muted-foreground: 240 5% 60%;
+
+  --accent: 240 4% 25%;
+  --accent-foreground: 0 0% 98%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 240 4% 20%;
+  --input: 240 4% 20%;
+  --ring: 32 88% 61%;
+
+  --radius: 0.75rem;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/30;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-bold tracking-tight;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* Range Input Styling for Audio Player */
+input[type=range] {
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+/* Utility for glass effect */
+.glass {
+  @apply bg-card/80 backdrop-blur-md border border-white/5 shadow-xl;
+}
